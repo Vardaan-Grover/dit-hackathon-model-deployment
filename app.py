@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from transformers import AutoConfig, AutoImageProcessor, ViTForImageClassification, BeitForImageClassification, BeitImageProcessor
 from safetensors import safe_open
 import torch
@@ -6,6 +7,7 @@ from PIL import Image
 import io
 
 app = Flask(__name__)
+CORS(app)
 
 # Load skin preprocessor and model configurations
 skin_config_path = "models/skin/config.json"
