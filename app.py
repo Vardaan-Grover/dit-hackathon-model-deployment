@@ -33,12 +33,8 @@ breast_model = BeitForImageClassification.from_pretrained('models/breast', confi
 
 breast_model.eval()
 
-@app.route('/')
-def home():
-    if request.method == "POST":
-        text = request.form.get('email-content')
-    return 'Hello World!'
-
+# Example CURL request to test the skin prediction endpoint:
+# curl -X POST -F "image=@<path_to_image>" http://127.0.0.1:5000/skin-predict
 @app.route('/skin-predict', methods=['POST'])
 def predict_skin():
     if 'image' not in request.files:
@@ -60,6 +56,8 @@ def predict_skin():
         "class_id": predicted_class
     })
 
+# Example CURL request to test the skin prediction endpoint:
+# curl -X POST -F "image=@<path_to_image>" http://127.0.0.1:5000/skin-predict
 @app.route('/breast-predict', methods=['POST'])
 def predict_breast():
     if 'image' not in request.files:
